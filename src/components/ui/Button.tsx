@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
 	onClick,
 }) => {
 	return (
-		<div>
+		<>
 			<button
 				type={type}
 				onClick={onClick}
@@ -39,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
 			>
 				{children}
 			</button>
-		</div>
+		</>
 	)
 }
 

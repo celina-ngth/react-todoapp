@@ -9,7 +9,7 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({ placeholder, value, onChange }) => {
 	return (
-		<div>
+		<>
 			<input
 				type="text"
 				placeholder={placeholder}
@@ -17,7 +17,7 @@ const Input: React.FC<InputProps> = ({ placeholder, value, onChange }) => {
 				onChange={(e) => onChange?.(e.target.value)}
 				className="border border-spacing-4 py-2 w-full border-neutral rounded-full px-4"
 			/>
-		</div>
+		</>
 	)
 }
 
