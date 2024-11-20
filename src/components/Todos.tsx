@@ -1,57 +1,48 @@
 import React from 'react'
 import Text, { Tag } from './ui/Text'
-import Input from './ui/Input'
+import InputCheckbox from './ui/InputCheckbox'
 import Form from './ui/Form'
 import Button, { Variant } from './ui/Button'
+import useTodos from '../hooks/useTodos'
+import InputSearch from './ui/InputSearch'
 
 const Todos: React.FC = () => {
-	const [text, setText] = React.useState('')
-	const [todos, setTodos] = React.useState([
-		{
-			id: 1,
-			text: 'Run a semi-marathon',
-		},
-		{
-			id: 2,
-			text: 'Learn React',
-		},
-	])
+	const { todos, text, addTodo, removeTodo, toggleComplete, setText } =
+		useTodos()
 
-	function addTodo(text: string) {
-		const newTodo = {
-			id: Date.now(),
-			text,
-		}
-		setTodos([...todos, newTodo])
-		setText('')
+	const handleSubmit = (event: React.FormEvent<Element>) => {
+		event.preventDefault()
+		addTodo(text)
 	}
 
 	return (
-		<div className="border-neutral border p-4 rounded-xl flex flex-col gap-4 relative">
+		<div className="border-neutral border p-6 rounded-xl flex flex-col gap-4 relative">
 			<Text tag={Tag.H3}>Todos</Text>
+
 			<hr />
 
-			<Form
-				id="todo-form"
-				className="relative flex z-50 bg-white rounded-full border border-neutral border-1 items-center px-2"
-				onSubmit={(event) => {
-					event.preventDefault()
-					addTodo(text)
-				}}
-			>
-				<Input
+			<Form id="todo-form" onSubmit={handleSubmit}>
+				<InputSearch
+					id="todo-input"
 					placeholder="Ajouter une todo..."
 					value={text}
 					onChange={setText}
-					className="rounded-full flex-1 p-4 focus:outline-none"
 				/>
-				<Button type="submit" variant={Variant.INFO}>
-					+
-				</Button>
 			</Form>
 
 			{todos.map((todo) => (
-				<Text key={todo.id}>{todo.text}</Text>
+				<div className="flex justify-between" key={todo.id}>
+					<InputCheckbox
+						id={todo.id.toString()}
+						name={todo.id.toString()}
+						value={todo.text}
+						checked={todo.complete}
+						onChange={() => toggleComplete(todo)}
+					/>
+					<Button variant={Variant.ERROR} onClick={() => removeTodo(todo.id)}>
+						×
+					</Button>
+				</div>
 			))}
 		</div>
 	)

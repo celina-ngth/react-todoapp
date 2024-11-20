@@ -7,7 +7,6 @@ export enum Variant {
 	INFO = 'info',
 	ERROR = 'error',
 }
-
 interface ButtonProps {
 	children: string
 	variant?: Variant
@@ -27,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
 				type={type}
 				onClick={onClick}
 				className={
-					'py-2 px-6 rounded-full text-base hover:bg-opacity-80 font-semibold ' +
+					'py-1 px-3 rounded-full text-base hover:bg-opacity-80 font-semibold h-fit' +
 					(variant === Variant.PRIMARY ? ' bg-primary text-secondary' : '') +
 					(variant === Variant.SECONDARY
 						? ' bg-secondary border border-1 border-neutral'

@@ -24,6 +24,7 @@ export default {
 			'warning-light': '#fff4e5',
 			error: '#f87463',
 			'error-light': '#ffedec',
+			transparent: 'transparent',
 		},
 		fontFamily: {
 			serif: ['Merriweather', 'serif'],
